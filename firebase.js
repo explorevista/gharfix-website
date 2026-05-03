@@ -1,25 +1,27 @@
 /**
- * firebase.js - Firebase v10 Modular SDK Configuration
- * GharFix Pakistan - Home Services Platform
+ * firebase.js - Firebase v10 Modular SDK (FIXED)
+ * GharFix Pakistan - Production Configuration
  */
+
+// Import Firebase v10 Modular SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { 
-  getAuth, 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut, 
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
   onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,
-  updateProfile
+  updateProfile as updateAuthProfile
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { 
-  getFirestore, 
+import {
+  getFirestore,
   doc, setDoc, getDoc, updateDoc, deleteDoc,
   collection, addDoc, getDocs, query, where, orderBy, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// 🔐 Firebase Configuration (EXACT as provided)
+// 🔐 Firebase Config (EXACT from your project)
 const firebaseConfig = {
   apiKey: "AIzaSyCu-7TW6L_vyvWKt0AXn8VmFBq0GLy9jUQ",
   authDomain: "gharfix-pakistan.firebaseapp.com",
@@ -34,7 +36,7 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-// Export all needed functions
+// Export all needed functions for app.js
 export {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -42,7 +44,10 @@ export {
   onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,
-  updateProfile,
+  updateAuthProfile,
   doc, setDoc, getDoc, updateDoc, deleteDoc,
   collection, addDoc, getDocs, query, where, orderBy, serverTimestamp
 };
+
+// Console confirmation (remove in production)
+console.log('✅ Firebase initialized:', app.name);
