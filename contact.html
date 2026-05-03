@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-PK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us – GharFix Pakistan</title>
+  <meta name="description" content="Get in touch with GharFix Pakistan. WhatsApp, email, or submit a support request.">
+  
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="toast" role="status" aria-live="polite"></div>
+  
+  <!-- Navigation (Same as index.html) -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="GharFix" class="logo-img" onerror="this.style.display='none'">
+        GharFix<span>.pk</span>
+      </a>
+      <button class="mobile-toggle" id="mobileToggle">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+        <span id="guestNav">
+          <a href="login.html" class="btn btn-sm btn-outline">Login</a>
+          <a href="signup.html" class="btn btn-sm btn-primary">Sign Up</a>
+        </span>
+        <span id="userNav" class="hidden">
+          <a href="dashboard.html" class="nav-link">Dashboard</a>
+          <a href="profile.html" class="nav-link" id="userName">Profile</a>
+          <a href="admin-dashboard.html" id="adminLink" class="nav-link hidden">Admin</a>
+          <button class="btn btn-sm btn-outline" id="themeToggle">🌓</button>
+          <a href="#" id="logoutBtn" class="btn btn-sm btn-danger">Logout</a>
+        </span>
+      </div>
+    </div>
+  </nav>
+  
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-4">
+          <h1>Contact Us</h1>
+          <p class="text-muted">We're here to help. Reach out anytime.</p>
+        </div>
+        
+        <div class="dashboard-grid">
+          <!-- Contact Info -->
+          <div class="card glass">
+            <h3>📞 Get In Touch</h3>
+            
+            <div class="mb-3">
+              <strong>Phone / WhatsApp</strong>
+              <p>
+                <a href="tel:+923441695860" class="text-primary" data-phone></a><br>
+                <a href="tel:+923272358384" class="text-primary">+92 327 2358384</a>
+              </p>
+            </div>
+            
+            <div class="mb-3">
+              <strong>Email</strong>
+              <p>
+                <a href="mailto:muhammadalikn53@gmail.com" data-email></a><br>
+                <a href="mailto:smarttoolsuniverse2026@gmail.com">smarttoolsuniverse2026@gmail.com</a><br>
+                <a href="mailto:greencontrolcenteraiagent@gmail.com">greencontrolcenteraiagent@gmail.com</a>
+              </p>
+            </div>
+            
+            <div class="mb-3">
+              <strong>Social Media</strong>
+              <div class="social-links">
+                <a href="https://yo.fan/smartworks" target="_blank" rel="noopener" class="social-link" data-social="yofan" title="YoFan">🔗</a>
+                <a href="https://smartverse-replica-project.lovable.app/" target="_blank" rel="noopener" class="social-link" data-social="lovable" title="Lovable">💜</a>
+                <a href="https://t.me/Aiearnverse" target="_blank" rel="noopener" class="social-link" data-social="telegram" title="Telegram">✈️</a>
+                <a href="https://www.linkedin.com/in/muhammad-ali-kn-22505a28a" target="_blank" rel="noopener" class="social-link" data-social="linkedin" title="LinkedIn">in</a>
+              </div>
+            </div>
+            
+            <div>
+              <strong>Business Hours</strong>
+              <p class="text-muted">Monday - Saturday: 9:00 AM - 9:00 PM PKT<br>Sunday: 10:00 AM - 6:00 PM PKT</p>
+            </div>
+          </div>
+          
+          <!-- Support Form -->
+          <div class="card glass" id="support">
+            <h3>💬 Get Support</h3>
+            <p class="text-muted mb-3">Describe your issue and we'll respond within 24 hours.</p>
+            
+            <form id="supportForm" class="form">
+              <div class="form-group">
+                <label for="supportCategory">Category</label>
+                <select id="supportCategory" class="form-control" required>
+                  <option value="">Select a category</option>
+                  <option value="booking">Booking Issue</option>
+                  <option value="worker">Worker Quality</option>
+                  <option value="payment">Payment Problem</option>
+                  <option value="technical">Technical Issue</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="supportMessage">Message</label>
+                <textarea id="supportMessage" class="form-control" rows="4" placeholder="Describe your issue in detail..." required></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Map Placeholder -->
+        <div class="mt-4">
+          <div class="card glass" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+            <p class="text-muted">📍 Service available across Pakistan<br><small>Lahore • Karachi • Islamabad • Rawalpindi • Faisalabad • Multan</small></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer (Same as index.html) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">GharFix<span>.pk</span></a>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </div>
+        <div class="footer-links">
+          <h4>Contact</h4>
+          <p>📞 <a href="tel:+923441695860" data-phone></a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> GharFix Pakistan. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <script type="module">
+    import { initFirebase } from './app.js';
+    await initFirebase();
+    import { initApp, submitSupportRequest, showToast } from './app.js';
+    
+    // Support form handler
+    document.getElementById('supportForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const category = document.getElementById('supportCategory').value;
+      const message = document.getElementById('supportMessage').value;
+      
+      if (!category || !message.trim()) {
+        showToast('Please fill in all fields', 'warning');
+        return;
+      }
+      
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"></span> Sending...';
+      
+      const success = await submitSupportRequest(category, message);
+      
+      btn.disabled = false;
+      btn.innerHTML = 'Submit Request';
+      
+      if (success) {
+        e.target.reset();
+      }
+    });
+    
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  </script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
