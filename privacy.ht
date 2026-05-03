@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-PK">
+<head>
+  <!-- Same meta tags as index.html -->
+  <title>Privacy Policy – GharFix Pakistan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navbar from index.html -->
+  <main id="main">
+    <section class="section">
+      <div class="container" style="max-width: 800px;">
+        <h1>Privacy Policy</h1>
+        <p class="text-muted">Last updated: <span id="lastUpdated"></span></p>
+        
+        <div class="card glass mt-4">
+          <h3>1. Information We Collect</h3>
+          <p>We collect information you provide directly to us, such as when you create an account, book a service, or contact support.</p>
+          
+          <h3 class="mt-3">2. How We Use Your Information</h3>
+          <p>We use your information to provide, maintain, and improve our services, process transactions, and communicate with you.</p>
+          
+          <h3 class="mt-3">3. Data Security</h3>
+          <p>We implement appropriate technical and organizational measures to protect your personal information.</p>
+          
+          <h3 class="mt-3">4. Contact Us</h3>
+          <p>Questions about this policy? Contact us at <a href="mailto:smarttoolsuniverse2026@gmail.com">smarttoolsuniverse2026@gmail.com</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Footer from index.html -->
+  <script>
+    document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-PK');
+  </script>
+</body>
+</html>
