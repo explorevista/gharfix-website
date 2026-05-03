@@ -3,85 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- SEO Meta Tags -->
   <title>GharFix Pakistan – Home Services Platform</title>
   <meta name="description" content="Find trusted electricians, plumbers, AC technicians & mechanics in Pakistan. Fast, reliable home services at your doorstep.">
   <meta name="keywords" content="home services pakistan, electrician, plumber, ac repair, handyman, gharfix">
   <meta name="author" content="Muhammad Ali">
   <meta name="robots" content="index, follow">
   
-  <!-- Open Graph / Social -->
+  <!-- Open Graph -->
   <meta property="og:title" content="GharFix Pakistan – Home Services Platform">
   <meta property="og:description" content="Har Ghar Ki Har Repair, Ek Click Par">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gharfix-pakistan.firebaseapp.com">
-  <meta property="og:image" content="assets/images/og-image.jpg">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
-  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
-  
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "GharFix Pakistan",
-    "description": "Home repair and services platform in Pakistan",
-    "url": "https://gharfix-pakistan.firebaseapp.com",
-    "telephone": "+923441695860",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "PK"
-    },
-    "founder": {
-      "@type": "Person",
-      "name": "Muhammad Ali"
-    }
-  }
-  </script>
 </head>
 <body>
-  <!-- Skip Link for Accessibility -->
+  <!-- Skip Link -->
   <a href="#main" class="skip-link">Skip to main content</a>
   
-  <!-- Toast Notification -->
+  <!-- Toast -->
   <div id="toast" role="status" aria-live="polite"></div>
   
-  <!-- Navigation -->
+  <!-- Navbar -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="container nav-container">
       <a href="index.html" class="logo" aria-label="GharFix Home">
         <img src="assets/images/logo.png" alt="GharFix" class="logo-img" onerror="this.style.display='none'">
         GharFix<span>.pk</span>
       </a>
-      
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
-        ☰
-      </button>
-      
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <div class="nav-links" id="navLinks">
         <a href="index.html" class="nav-link active">Home</a>
         <a href="about.html" class="nav-link">About</a>
         <a href="#services" class="nav-link">Services</a>
         <a href="contact.html" class="nav-link">Contact</a>
-        
-        <!-- Guest Navigation -->
         <span id="guestNav">
           <a href="login.html" class="btn btn-sm btn-outline">Login</a>
           <a href="signup.html" class="btn btn-sm btn-primary">Sign Up</a>
         </span>
-        
-        <!-- User Navigation -->
         <span id="userNav" class="hidden">
           <a href="dashboard.html" class="nav-link">Dashboard</a>
           <a href="profile.html" class="nav-link" id="userName">Profile</a>
@@ -93,9 +61,9 @@
     </div>
   </nav>
   
-  <!-- Main Content -->
+  <!-- Main -->
   <main id="main">
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
       <div class="container hero-content">
         <div class="hero-text animate-slide">
@@ -103,80 +71,61 @@
           <p>Find verified electricians, plumbers, AC technicians & mechanics across Pakistan. Quality work, guaranteed satisfaction.</p>
           <div class="hero-cta">
             <a href="#services" class="btn btn-lg btn-primary">Browse Services</a>
-            <a href="https://wa.me/923441695860" target="_blank" rel="noopener" class="btn btn-lg btn-whatsapp">
-              💬 Chat on WhatsApp
-            </a>
+            <a href="https://wa.me/923441695860" target="_blank" rel="noopener" class="btn btn-lg btn-whatsapp">💬 Chat on WhatsApp</a>
           </div>
         </div>
         <div class="hero-image animate-fade">
-          <img src="assets/images/hero.jpg" 
-               alt="Professional home repair services in Pakistan"
-               onerror="this.src='https://via.placeholder.com/600x400?text=GharFix+Services'">
+          <img src="assets/images/hero.jpg" alt="Professional home repair services in Pakistan" onerror="this.src='https://via.placeholder.com/600x400?text=GharFix+Services'">
         </div>
       </div>
     </section>
     
-    <!-- Services Section -->
+    <!-- Services -->
     <section id="services" class="section">
       <div class="container">
         <div class="text-center mb-4">
           <h2>Our Services</h2>
           <p class="text-muted">Professional home repair services at your fingertips</p>
         </div>
-        
         <div class="services-grid">
           <button class="card service-card glass" data-service="electrician" aria-label="Electrician services">
-            <span class="service-icon">⚡</span>
-            <span class="service-name">Electrician</span>
+            <span class="service-icon">⚡</span><span class="service-name">Electrician</span>
           </button>
           <button class="card service-card glass" data-service="plumber" aria-label="Plumber services">
-            <span class="service-icon">🚰</span>
-            <span class="service-name">Plumber</span>
+            <span class="service-icon">🚰</span><span class="service-name">Plumber</span>
           </button>
           <button class="card service-card glass" data-service="ac" aria-label="AC Technician services">
-            <span class="service-icon">❄️</span>
-            <span class="service-name">AC Technician</span>
+            <span class="service-icon">❄️</span><span class="service-name">AC Technician</span>
           </button>
           <button class="card service-card glass" data-service="carpenter" aria-label="Carpenter services">
-            <span class="service-icon">🪵</span>
-            <span class="service-name">Carpenter</span>
+            <span class="service-icon">🪵</span><span class="service-name">Carpenter</span>
           </button>
           <button class="card service-card glass" data-service="mason" aria-label="Mason services">
-            <span class="service-icon">🧱</span>
-            <span class="service-name">Mason</span>
+            <span class="service-icon">🧱</span><span class="service-name">Mason</span>
           </button>
           <button class="card service-card glass" data-service="painter" aria-label="Painter services">
-            <span class="service-icon">🎨</span>
-            <span class="service-name">Painter</span>
+            <span class="service-icon">🎨</span><span class="service-name">Painter</span>
           </button>
           <button class="card service-card glass" data-service="car-mechanic" aria-label="Car Mechanic services">
-            <span class="service-icon">🚗</span>
-            <span class="service-name">Car Mechanic</span>
+            <span class="service-icon">🚗</span><span class="service-name">Car Mechanic</span>
           </button>
           <button class="card service-card glass" data-service="bike-mechanic" aria-label="Bike Mechanic services">
-            <span class="service-icon">🏍️</span>
-            <span class="service-name">Bike Mechanic</span>
+            <span class="service-icon">🏍️</span><span class="service-name">Bike Mechanic</span>
           </button>
         </div>
       </div>
     </section>
     
-    <!-- Featured Workers -->
+    <!-- Workers -->
     <section class="section" style="background: var(--bg);">
       <div class="container">
         <div class="text-center mb-4">
           <h2>Featured Professionals</h2>
           <p class="text-muted">Verified workers ready to help you</p>
         </div>
-        
         <div id="workersGrid" class="workers-grid">
-          <!-- Workers loaded dynamically via JavaScript -->
-          <div class="text-center">
-            <span class="loading"></span>
-            <p class="text-muted mt-2">Loading professionals...</p>
-          </div>
+          <div class="text-center"><span class="loading"></span><p class="text-muted mt-2">Loading professionals...</p></div>
         </div>
-        
         <div class="text-center mt-4">
           <a href="dashboard.html" class="btn btn-outline">View All Workers →</a>
         </div>
@@ -212,7 +161,6 @@
             <a href="https://t.me/Aiearnverse" target="_blank" rel="noopener" class="social-link" aria-label="Telegram">✈️</a>
           </div>
         </div>
-        
         <div class="footer-links">
           <h4>Quick Links</h4>
           <a href="index.html">Home</a>
@@ -221,14 +169,12 @@
           <a href="contact.html">Contact</a>
           <a href="dashboard.html">Dashboard</a>
         </div>
-        
         <div class="footer-links">
           <h4>Legal</h4>
           <a href="privacy.html">Privacy Policy</a>
           <a href="terms.html">Terms of Service</a>
           <a href="disclaimer.html">Disclaimer</a>
         </div>
-        
         <div class="footer-links">
           <h4>Contact</h4>
           <p>📞 <a href="tel:+923441695860" data-phone>+92 344 1695860</a></p>
@@ -236,7 +182,6 @@
           <p>🕐 Mon-Sat: 9AM - 9PM PKT</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; <span id="currentYear"></span> GharFix Pakistan. All rights reserved.</p>
         <p class="text-muted" style="font-size: 0.8rem; margin-top: 0.5rem;">
@@ -247,33 +192,7 @@
   </footer>
   
   <!-- Scripts -->
-  <script type="module">
-    // Initialize Firebase first
-    import { initFirebase } from './app.js';
-    
-    await initFirebase();
-    
-    // Then initialize app
-    import { initApp, loadWorkers, initAuthListener, auth, signOut, showToast } from './app.js';
-    
-    // Load workers on home page
-    loadWorkers('workersGrid');
-    
-    // Logout handler
-    document.getElementById('logoutBtn')?.addEventListener('click', async (e) => {
-      e.preventDefault();
-      try {
-        await signOut(auth);
-        showToast('Logged out successfully', 'success');
-        window.location.href = 'index.html';
-      } catch (error) {
-        showToast('Logout failed', 'error');
-      }
-    });
-    
-    // Set current year
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-  </script>
+  <script type="module" src="firebase.js"></script>
   <script type="module" src="app.js"></script>
 </body>
 </html>
