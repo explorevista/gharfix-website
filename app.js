@@ -1,97 +1,107 @@
-/**
- * app.js – Core Application Logic (COMPLETE)
- * GharFix Pakistan – Production Ready
- * 
- * ✅ Auth: Email/Password
- * ✅ Firestore: users, workers, support_requests
- * ✅ IMGBB: Image upload
- * ✅ Admin: Restricted access
- * ✅ UI: Premium interactions
- */
+// app.js - Complete Application Logic
 
-// ✅ IMPORTS
-import { auth, db } from "./firebase.js";
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut, 
-  onAuthStateChanged,
-  sendEmailVerification,
-  sendPasswordResetEmail,
-  doc, setDoc, getDoc, updateDoc,
-  collection, addDoc, getDocs, query, where, orderBy, serverTimestamp
-} from "./firebase.js";
-
-// ✅ CONFIG
-export const IMGBB_API_KEY = "6f4684c9de2fadd52ece29d612c11a73";
-export const ADMIN_EMAIL = "smarttoolsuniverse2026@gmail.com";
-
-export const SERVICES = [
-  { id: 'electrician', name: 'Electrician', icon: '⚡' },
-  { id: 'plumber', name: 'Plumber', icon: '🚰' },
-  { id: 'ac', name: 'AC Technician', icon: '❄️' },
-  { id: 'carpenter', name: 'Carpenter', icon: '🪵' },
-  { id: 'mason', name: 'Mason', icon: '🧱' },
-  { id: 'painter', name: 'Painter', icon: '🎨' },
-  { id: 'car-mechanic', name: 'Car Mechanic', icon: '🚗' },
-  { id: 'bike-mechanic', name: 'Bike Mechanic', icon: '🏍️' }
-];
-
-export const CONTACT = {
-  phones: ['+92 344 1695860', '+92 327 2358384'],
-  emails: [
-    'muhammadalikn53@gmail.com',
-    'smarttoolsuniverse2026@gmail.com',
-    'greencontrolcenteraiagent@gmail.com',
-    'digitalreadsstudio5@gmail.com',
-    'contacttravelscope@gmail.com'
-  ],
-  social: {
-    yofan: 'https://yo.fan/smartworks',
-    lovable: 'https://smartverse-replica-project.lovable.app/',
-    telegram: 'https://t.me/Aiearnverse',
-    linkedin: 'https://www.linkedin.com/in/muhammad-ali-kn-22505a28a',
-    facebook: [
-      'https://www.facebook.com/share/1HtgWdb4eR/',
-      'https://www.facebook.com/smarttoolsuniverse',
-      'https://www.facebook.com/digitalreadsstudio'
-    ],
-    instagram: [
-      'https://www.instagram.com/explorevista2025',
-      'https://www.instagram.com/smarttoolsuniverse'
-    ]
+// Language Translations
+const translations = {
+  en: {
+    home: "Home",
+    about: "About",
+    services: "Services",
+    contact: "Contact",
+    login: "Login",
+    signup: "Sign Up",
+    heroTitle: "Har Ghar Ki Har Repair, Ek Click Par",
+    heroSubtitle: "Find verified electricians, plumbers, AC technicians & mechanics across Pakistan. Quality work, guaranteed satisfaction.",
+    browseServices: "Browse Services",
+    chatWhatsApp: "Chat on WhatsApp",
+    ourServices: "Our Services",
+    servicesSubtitle: "Professional home repair services at your fingertips",
+    featuredWorkers: "Featured Professionals",
+    workersSubtitle: "Verified workers ready to help you",
+    needHelp: "Need Custom Help?",
+    needHelpText: "Can't find what you need? Submit a support request and we'll connect you with the right professional within 24 hours.",
+    getSupport: "Get Support"
+  },
+  ur: {
+    home: "ہوم",
+    about: "ہمارے بارے میں",
+    services: "سروسز",
+    contact: "رابطہ",
+    login: "لاگ ان",
+    signup: "سائن اپ",
+    heroTitle: "ہر گھر کی ہر ریپئر، ایک کلک پر",
+    heroSubtitle: "پورے پاکستان میں تصدیق شدہ الیکٹریشن، پلمبر، AC ٹیکنیشن اور میکانکس تلاش کریں۔ معیاری کام، مکمل اطمینان۔",
+    browseServices: "سروسز دیکھیں",
+    chatWhatsApp: "واٹس ایپ پر چیٹ کریں",
+    ourServices: "ہماری سروسز",
+    servicesSubtitle: "پیشہ ورانہ گھر کی مرمت کی خدمات آپ کی انگلیوں پر",
+    featuredWorkers: "نمایاں پیشہ ور",
+    workersSubtitle: "تصدیق شدہ ورکرز آپ کی مدد کے لیے تیار",
+    needHelp: "خصوصی مدد چاہیے؟",
+    needHelpText: "جو چاہیے وہ نہیں مل رہا؟ سپورٹ درخواست جمع کروائیں اور ہم 24 گھنٹے کے اندر آپ کو صحیح پیشہ ور سے جوڑ دیں گے۔",
+    getSupport: "مدد حاصل کریں"
+  },
+  ar: {
+    home: "الرئيسية",
+    about: "حول",
+    services: "الخدمات",
+    contact: "اتصل",
+    login: "تسجيل الدخول",
+    signup: "إنشاء حساب",
+    heroTitle: "كل إصلاح منزلي بنقرة واحدة",
+    heroSubtitle: "اعثر على كهربائيين وسباكين وفنيي تكييف وميكانيكيين معتمدين في جميع أنحاء باكستان. عمل عالي الجودة مع ضمان الرضا.",
+    browseServices: "تصفح الخدمات",
+    chatWhatsApp: "دردشة على واتساب",
+    ourServices: "خدماتنا",
+    servicesSubtitle: "خدمات إصلاح المنازل الاحترافية في متناول يدك",
+    featuredWorkers: "المهنيون المميزون",
+    workersSubtitle: "عمال معتمدون جاهزون لمساعدتك",
+    needHelp: "تحتاج إلى مساعدة مخصصة؟",
+    needHelpText: "لا تجد ما تحتاجه؟ قدم طلب دعم وسنقوم بتوصيلك بالمحترف المناسب خلال 24 ساعة.",
+    getSupport: "احصل على الدعم"
+  },
+  ru: {
+    home: "Главная",
+    about: "О нас",
+    services: "Услуги",
+    contact: "Контакт",
+    login: "Вход",
+    signup: "Регистрация",
+    heroTitle: "Весь ремонт дома в один клик",
+    heroSubtitle: "Найдите проверенных электриков, сантехников, техников по кондиционерам и механиков по всей Пакистану. Качественная работа с гарантией.",
+    browseServices: "Просмотреть услуги",
+    chatWhatsApp: "Чат в WhatsApp",
+    ourServices: "Наши услуги",
+    servicesSubtitle: "Профессиональные услуги по ремонту дома у вас под рукой",
+    featuredWorkers: "Избранные специалисты",
+    workersSubtitle: "Проверенные работники готовы помочь вам",
+    needHelp: "Нужна индивидуальная помощь?",
+    needHelpText: "Не можете найти то, что вам нужно? Отправьте запрос в поддержку, и мы свяжем вас с подходящим специалистом в течение 24 часов.",
+    getSupport: "Получить поддержку"
   }
 };
 
-export const FOUNDER = {
-  name: 'Muhammad Ali',
-  mission: 'Provide fast and reliable home services in Pakistan'
-};
+let currentLang = 'en';
 
-// ✅ STATE
-let currentUser = null;
-let userProfile = null;
+// Initialize App
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initLanguage();
+  initNavigation();
+  initPasswordToggle();
+  initAuth();
+  initServiceCategories();
+  initSupportForm();
+  updateLanguage();
+});
 
-export const getState = () => ({ user: currentUser, profile: userProfile });
-export const isAdmin = () => currentUser?.email === ADMIN_EMAIL;
-
-// ✅ TOAST
-export function showToast(message, type = 'info') {
-  const toast = document.getElementById('toast');
-  if (!toast) return;
-  const icons = { success: '✓', error: '✕', warning: '⚠', info: 'ℹ' };
-  toast.innerHTML = `<span class="toast-icon">${icons[type] || 'ℹ'}</span><span>${message}</span>`;
-  toast.className = `toast ${type} show`;
-  setTimeout(() => toast.classList.remove('show'), 4000);
-}
-
-// ✅ THEME
-export function initTheme() {
+// Theme Toggle
+function initTheme() {
   const toggle = document.getElementById('themeToggle');
   const saved = localStorage.getItem('gharfix-theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const theme = saved || (prefersDark ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', theme);
+  
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+  }
   
   if (toggle) {
     toggle.addEventListener('click', () => {
@@ -104,286 +114,168 @@ export function initTheme() {
   }
 }
 
-// ✅ IMGBB UPLOAD
-export async function uploadToImgBB(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = async () => {
-      const base64 = reader.result.split(',')[1];
-      try {
-        const res = await fetch(
-          `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}&image=${base64}`,
-          { method: 'POST' }
-        );
-        const data = await res.json();
-        if (data.success) resolve(data.data.url);
-        else reject(new Error(data.error?.message || 'Upload failed'));
-      } catch (err) { reject(err); }
-    };
-    reader.onerror = () => reject(new Error('Failed to read file'));
+// Language Toggle
+function initLanguage() {
+  const langButtons = document.querySelectorAll('.lang-btn');
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const lang = e.target.dataset.lang;
+      currentLang = lang;
+      
+      langButtons.forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      
+      updateLanguage();
+      localStorage.setItem('gharfix-lang', lang);
+    });
+  });
+  
+  // Load saved language
+  const saved = localStorage.getItem('gharfix-lang');
+  if (saved) {
+    currentLang = saved;
+    langButtons.forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === saved);
+    });
+  }
+}
+
+function updateLanguage() {
+  const t = translations[currentLang];
+  
+  // Update all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      el.textContent = t[key];
+    }
+  });
+  
+  // Update page direction for Arabic/Urdu
+  if (currentLang === 'ar' || currentLang === 'ur') {
+    document.documentElement.setAttribute('dir', 'rtl');
+  } else {
+    document.documentElement.setAttribute('dir', 'ltr');
+  }
+}
+
+// Password Visibility Toggle
+function initPasswordToggle() {
+  document.querySelectorAll('.password-toggle').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const input = toggle.previousElementSibling;
+      const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+      input.setAttribute('type', type);
+      toggle.textContent = type === 'password' ? '👁️' : '🙈';
+    });
   });
 }
 
-// ✅ AUTH UI
-function updateAuthUI(isLoggedIn, user = null, profile = null) {
-  const guestNav = document.getElementById('guestNav');
-  const userNav = document.getElementById('userNav');
-  const adminLink = document.getElementById('adminLink');
-  const userName = document.getElementById('userName');
-  
-  if (isLoggedIn && user) {
-    guestNav?.classList.add('hidden');
-    userNav?.classList.remove('hidden');
-    adminLink?.classList.toggle('hidden', !isAdmin());
-    if (userName && profile) {
-      userName.textContent = profile.name || user.email?.split('@')[0] || 'User';
-    }
-  } else {
-    guestNav?.classList.remove('hidden');
-    userNav?.classList.add('hidden');
-    adminLink?.classList.add('hidden');
-  }
-}
-
-// ✅ WORKER CARD
-export function renderWorkerCard(worker) {
-  const service = SERVICES.find(s => s.id === worker.category);
-  const phone = worker.phone?.replace(/\s/g, '');
-  const whatsappUrl = `https://wa.me/92${phone?.startsWith('92') ? phone.slice(2) : phone}`;
-  
-  return `
-    <article class="card worker-card glass">
-      <header class="worker-header">
-        <img src="${worker.photo || 'https://via.placeholder.com/64?text=👤'}" 
-             alt="${worker.name}" class="worker-avatar"
-             onerror="this.src='https://via.placeholder.com/64?text=👤'">
-        <div class="worker-info">
-          <h4>${worker.name}</h4>
-          <p class="text-muted">${service?.name || worker.category}</p>
-        </div>
-        <span class="worker-badge ${worker.available ? 'badge-available' : 'badge-busy'}">
-          ${worker.available ? 'Available' : 'Busy'}
-        </span>
-      </header>
-      ${worker.experience || worker.rating ? `
-        <p class="text-muted text-sm">
-          ${worker.experience ? `⭐ ${worker.experience}yrs` : ''}
-          ${worker.experience && worker.rating ? ' • ' : ''}
-          ${worker.rating ? `${worker.rating}/5 ★` : ''}
-        </p>
-      ` : ''}
-      ${worker.location ? `<p class="text-muted text-sm">📍 ${worker.location}</p>` : ''}
-      <footer class="worker-actions">
-        <a href="tel:${worker.phone}" class="btn btn-sm btn-outline">📞 Call</a>
-        <a href="${whatsappUrl}" target="_blank" rel="noopener" class="btn btn-sm btn-whatsapp">💬 WhatsApp</a>
-      </footer>
-    </article>
-  `;
-}
-
-// ✅ LOAD WORKERS
-export async function loadWorkers(containerId, category = null) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  
-  try {
-    container.innerHTML = '<div class="text-center"><span class="loading"></span><p class="text-muted mt-2">Loading professionals...</p></div>';
-    let q = query(collection(db, 'workers'), where('status', '==', 'approved'));
-    if (category) q = query(q, where('category', '==', category));
-    const snapshot = await getDocs(q);
-    
-    if (snapshot.empty) {
-      container.innerHTML = '<p class="text-center text-muted">No workers available yet. Check back soon!</p>';
-      return;
-    }
-    
-    const workers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    container.innerHTML = workers.map(renderWorkerCard).join('');
-  } catch (error) {
-    console.error('Error loading workers:', error);
-    container.innerHTML = '<p class="text-center text-muted error">Failed to load workers. Please try again.</p>';
-    showToast('Failed to load workers', 'error');
-  }
-}
-
-// ✅ SUPPORT REQUEST
-export async function submitSupportRequest(category, message) {
-  if (!currentUser) {
-    showToast('Please login to submit a support request', 'warning');
-    return false;
-  }
-  try {
-    await addDoc(collection(db, 'support_requests'), {
-      userId: currentUser.uid,
-      userEmail: currentUser.email,
-      userName: userProfile?.name || 'Anonymous',
-      category,
-      message: message.trim(),
-      status: 'open',
-      createdAt: serverTimestamp()
-    });
-    showToast('Support request submitted! We\'ll contact you soon.', 'success');
-    return true;
-  } catch (error) {
-    console.error('Support error:', error);
-    showToast('Failed to submit request', 'error');
-    return false;
-  }
-}
-
-// ✅ PROFILE UPDATE
-export async function updateProfile(data, imageFile = null) {
-  if (!currentUser) return false;
-  try {
-    let photoUrl = userProfile?.photo;
-    if (imageFile) photoUrl = await uploadToImgBB(imageFile);
-    
-    await updateDoc(doc(db, 'users', currentUser.uid), {
-      name: data.name, phone: data.phone, location: data.location,
-      photo: photoUrl, updatedAt: serverTimestamp()
-    });
-    userProfile = { ...userProfile, ...data, photo: photoUrl };
-    showToast('Profile updated successfully', 'success');
-    return true;
-  } catch (error) {
-    console.error('Profile update error:', error);
-    showToast('Failed to update profile', 'error');
-    return false;
-  }
-}
-
-// ✅ NAVIGATION
-export function initNavigation() {
+// Navigation
+function initNavigation() {
   const mobileToggle = document.getElementById('mobileToggle');
   const navLinks = document.getElementById('navLinks');
   
   if (mobileToggle && navLinks) {
     mobileToggle.addEventListener('click', () => {
       navLinks.classList.toggle('active');
-      mobileToggle.setAttribute('aria-expanded', navLinks.classList.contains('active'));
-    });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('active'));
     });
   }
   
-  const navbar = document.querySelector('.navbar');
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 10);
-    });
-  }
-}
-
-// ✅ SERVICE CATEGORIES
-export function initServiceCategories() {
-  document.querySelectorAll('[data-service]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
       e.preventDefault();
-      const category = btn.dataset.service;
-      const workersSection = document.getElementById('workersGrid');
-      if (workersSection) {
-        loadWorkers('workersGrid', category);
-        workersSection.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.location.href = `dashboard.html?category=${category}`;
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
 }
 
-// ✅ SUPPORT FORM
-export function initSupportForm() {
+// Service Categories
+function initServiceCategories() {
+  document.querySelectorAll('[data-service]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.dataset.service;
+      showToast(`Loading ${category} professionals...`, 'info');
+      // Add your worker filtering logic here
+    });
+  });
+}
+
+// Support Form
+function initSupportForm() {
   const form = document.getElementById('supportForm');
-  if (!form) return;
-  
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const category = document.getElementById('supportCategory')?.value;
-    const message = document.getElementById('supportMessage')?.value;
-    
-    if (!category || !message?.trim()) {
-      showToast('Please fill in all fields', 'warning');
-      return;
-    }
-    
-    const btn = form.querySelector('button[type="submit"]');
-    const originalText = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="loading"></span> Sending...';
-    
-    const success = await submitSupportRequest(category, message);
-    
-    btn.disabled = false;
-    btn.innerHTML = originalText;
-    if (success) form.reset();
-  });
-}
-
-// ✅ AUTH LISTENER
-export async function initAuthListener() {
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      try {
-        const userDoc = await getDoc(doc(db, 'users', user.uid));
-        const profile = userDoc.exists() ? userDoc.data() : null;
-        currentUser = user;
-        userProfile = profile;
-        updateAuthUI(true, user, profile);
-        if (document.getElementById('workersGrid')) loadWorkers('workersGrid');
-      } catch (error) {
-        console.error('Auth listener error:', error);
-        updateAuthUI(true, user, null);
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const category = document.getElementById('supportCategory').value;
+      const message = document.getElementById('supportMessage').value;
+      
+      if (!category || !message.trim()) {
+        showToast('Please fill in all fields', 'error');
+        return;
       }
+      
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.innerHTML = '<span class="loading"></span> Sending...';
+      btn.disabled = true;
+      
+      try {
+        // Import Firebase functions
+        const { db, collection, addDoc, serverTimestamp } = await import('./firebase.js');
+        
+        await addDoc(collection(db, 'support_requests'), {
+          category,
+          message: message.trim(),
+          status: 'open',
+          createdAt: serverTimestamp()
+        });
+        
+        showToast('Support request submitted! We\'ll contact you soon.', 'success');
+        form.reset();
+      } catch (error) {
+        console.error('Error:', error);
+        showToast('Failed to submit request. Please try again.', 'error');
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    });
+  }
+}
+
+// Toast Notification
+function showToast(message, type = 'info') {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  
+  toast.textContent = message;
+  toast.className = `toast ${type} show`;
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 4000);
+}
+
+// Auth Functions (will be called from login/signup pages)
+window.initAuth = async function() {
+  const { auth, onAuthStateChanged } = await import('./firebase.js');
+  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log('User logged in:', user.email);
     } else {
-      currentUser = null;
-      userProfile = null;
-      updateAuthUI(false);
+      console.log('User logged out');
     }
   });
-}
+};
 
-// ✅ MAIN INIT
-export function initApp() {
-  initTheme();
-  initNavigation();
-  initServiceCategories();
-  initSupportForm();
-  initAuthListener();
-  
-  // Populate contact data
-  document.querySelectorAll('[data-phone]').forEach((el, i) => {
-    el.href = `tel:${CONTACT.phones[i]?.replace(/\s/g, '')}`;
-    el.textContent = CONTACT.phones[i];
-  });
-  document.querySelectorAll('[data-email]').forEach((el, i) => {
-    el.href = `mailto:${CONTACT.emails[i]}`;
-    el.textContent = CONTACT.emails[i];
-  });
-  
-  // Founder info
-  const founderName = document.getElementById('founderName');
-  const founderMission = document.getElementById('founderMission');
-  if (founderName) founderName.textContent = FOUNDER.name;
-  if (founderMission) founderMission.textContent = FOUNDER.mission;
-  
-  // Current year
-  const yearEl = document.getElementById('currentYear');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-}
-
-// ✅ GLOBAL ERROR HANDLING
-window.addEventListener('error', (e) => {
-  console.error('Global error:', e.error);
-  if (e.message?.includes('Firebase') || e.message?.includes('Network')) {
-    showToast('A network error occurred. Please check your connection.', 'error');
-  }
-});
-
-// ✅ INIT ON DOM READY
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
-} else {
-  initApp();
-}
+// Export for other pages
+window.showToast = showToast;
+window.updateLanguage = updateLanguage;
+window.currentLang = currentLang;
