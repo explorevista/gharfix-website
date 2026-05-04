@@ -1,30 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-GB" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GharFix Pakistan – Home Services Platform</title>
-  <meta name="description" content="Find trusted electricians, plumbers, AC technicians & mechanics in Pakistan.">
+  
+  <!-- SEO Meta Tags -->
+  <title>KarigarHub Pakistan – Home Services Platform</title>
+  <meta name="description" content="Find trusted electricians, plumbers, AC technicians & mechanics in Pakistan. Fast, reliable home services at your doorstep.">
+  <meta name="keywords" content="home services pakistan, electrician, plumber, ac repair, handyman, karigarhub">
+  <meta name="author" content="Muhammad Ali">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="KarigarHub Pakistan – Home Services Platform">
+  <meta property="og:description" content="Find trusted home professionals instantly. Verified workers, transparent pricing, guaranteed satisfaction.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://karigarhub-pakistan.firebaseapp.com">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+  
+  <!-- Structured Data (LocalBusiness Schema) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "KarigarHub Pakistan",
+    "description": "Home repair and services platform connecting homeowners with verified professionals across Pakistan",
+    "url": "https://karigarhub-pakistan.firebaseapp.com",
+    "telephone": "+923441695860",
+    "address": { "@type": "PostalAddress", "addressCountry": "PK" },
+    "founder": { "@type": "Person", "name": "Muhammad Ali" },
+    "areaServed": "Pakistan",
+    "serviceType": ["Electrician", "Plumber", "AC Repair", "Carpenter", "Mason", "Mechanic"]
+  }
+  </script>
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
   
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Google Analytics Placeholder -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+  <!-- <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script> -->
 </head>
 <body>
-  <!-- Toast -->
-  <div id="toast"></div>
+  <!-- Skip Link for Accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
   
-  <!-- Navbar -->
-  <nav class="navbar">
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite"></div>
+  
+  <!-- AI Assistant -->
+  <div class="ai-assistant">
+    <button class="ai-toggle" id="aiToggle" title="Chat with KarigarBot">🤖</button>
+    <div class="ai-chat glass" id="aiChat">
+      <div class="ai-header">
+        <span>🤖</span>
+        <h4 data-i18n="aiName">KarigarBot</h4>
+        <button class="ai-close" id="aiClose">&times;</button>
+      </div>
+      <div class="ai-messages" id="aiMessages"></div>
+      <div class="ai-input">
+        <input type="text" id="aiInput" placeholder="Type your question..." data-i18n="aiPlaceholder">
+        <button id="aiSend" data-i18n="aiSend">Send</button>
+        <button class="ai-voice-btn" id="aiVoice" title="Voice input" data-i18n="aiVoice">🎤</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="index.html" class="logo">GharFix.pk</a>
+      <a href="index.html" class="logo" aria-label="KarigarHub Home">
+        <img src="assets/images/logo.png" alt="KarigarHub" class="logo-img" onerror="this.style.display='none'">
+        KarigarHub.pk
+      </a>
+      
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       
       <div class="nav-links" id="navLinks">
         <a href="index.html" class="nav-link active" data-i18n="home">Home</a>
@@ -36,129 +100,180 @@
         <div class="lang-toggle">
           <button class="lang-btn active" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="ur">UR</button>
-          <button class="lang-btn" data-lang="ar">AR</button>
-          <button class="lang-btn" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="roman">ROMAN</button>
         </div>
         
         <!-- Theme Toggle -->
-        <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">🌓</button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
         
-        <a href="login.html" class="btn btn-outline" data-i18n="login">Login</a>
-        <a href="signup.html" class="btn btn-primary" data-i18n="signup">Sign Up</a>
+        <!-- Guest Navigation -->
+        <span id="guestNav">
+          <a href="login.html" class="btn btn-sm btn-outline" data-i18n="login">Login</a>
+          <a href="signup.html" class="btn btn-sm btn-primary" data-i18n="signup">Sign Up</a>
+        </span>
+        
+        <!-- User Navigation -->
+        <span id="userNav" class="hidden">
+          <a href="dashboard.html" class="nav-link" data-i18n="dashboard">Dashboard</a>
+          <a href="profile.html" class="nav-link" id="userName">Profile</a>
+          <a href="admin-dashboard.html" id="adminLink" class="nav-link hidden" data-i18n="admin">Admin</a>
+          <a href="#" id="logoutBtn" class="btn btn-sm btn-danger" data-i18n="logout">Logout</a>
+        </span>
       </div>
-      
-      <button class="mobile-toggle" id="mobileToggle" style="display:none;">☰</button>
     </div>
   </nav>
   
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1 data-i18n="heroTitle">Har Ghar Ki Har Repair, Ek Click Par</h1>
-        <p data-i18n="heroSubtitle">Find verified electricians, plumbers, AC technicians & mechanics across Pakistan. Quality work, guaranteed satisfaction.</p>
-        <div class="hero-cta">
-          <a href="#services" class="btn btn-primary" data-i18n="browseServices">Browse Services</a>
-          <a href="https://wa.me/923441695860" target="_blank" class="btn btn-outline" data-i18n="chatWhatsApp">💬 Chat on WhatsApp</a>
+  <!-- Main Content -->
+  <main id="main">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text animate-slide">
+          <h1 data-i18n="heroTitle">Find Trusted Home Professionals, Instantly</h1>
+          <p data-i18n="heroSubtitle">KarigarHub connects you with verified electricians, plumbers, AC technicians & more across Pakistan. Quality work, transparent pricing, guaranteed satisfaction.</p>
+          <div class="hero-cta">
+            <a href="#services" class="btn btn-lg btn-primary" data-i18n="browseServices">Browse Services</a>
+            <a href="https://wa.me/923441695860" target="_blank" rel="noopener" class="btn btn-lg btn-outline" data-i18n="chatWhatsApp">💬 Chat on WhatsApp</a>
+          </div>
+        </div>
+        <div class="hero-image animate-slide-right">
+          <img src="assets/images/hero.jpg" alt="Professional home repair services in Pakistan" onerror="this.src='https://via.placeholder.com/600x400/D4AF37/0F172A?text=KarigarHub+Pakistan'">
         </div>
       </div>
-      <div class="hero-image">
-        <img src="assets/images/hero.jpg" alt="GharFix Services" onerror="this.src='https://via.placeholder.com/600x400/FFD700/000000?text=GharFix+Pakistan'">
-      </div>
-    </div>
-  </section>
-  
-  <!-- Services Section -->
-  <section id="services" class="services-section">
-    <div class="text-center" style="margin-bottom: 3rem;">
-      <h2 data-i18n="ourServices">Our Services</h2>
-      <p data-i18n="servicesSubtitle" style="color: var(--text-sec);">Professional home repair services at your fingertips</p>
-    </div>
+    </section>
     
-    <div class="services-grid">
-      <div class="service-card" data-service="electrician">
-        <span class="service-icon">⚡</span>
-        <span class="service-name">Electrician</span>
+    <!-- Services Section -->
+    <section id="services" class="section">
+      <div class="container">
+        <div class="text-center mb-4">
+          <h2 data-i18n="ourServices">Our Services</h2>
+          <p data-i18n="servicesSubtitle" class="text-muted">Professional home repair services at your fingertips</p>
+        </div>
+        
+        <div class="services-grid">
+          <button class="service-card glass" data-service="electrician" aria-label="Electrician services">
+            <span class="service-icon">⚡</span>
+            <span class="service-name">Electrician</span>
+          </button>
+          <button class="service-card glass" data-service="plumber" aria-label="Plumber services">
+            <span class="service-icon">🚰</span>
+            <span class="service-name">Plumber</span>
+          </button>
+          <button class="service-card glass" data-service="ac" aria-label="AC Technician services">
+            <span class="service-icon">❄️</span>
+            <span class="service-name">AC Technician</span>
+          </button>
+          <button class="service-card glass" data-service="carpenter" aria-label="Carpenter services">
+            <span class="service-icon">🪵</span>
+            <span class="service-name">Carpenter</span>
+          </button>
+          <button class="service-card glass" data-service="mason" aria-label="Mason services">
+            <span class="service-icon">🧱</span>
+            <span class="service-name">Mason</span>
+          </button>
+          <button class="service-card glass" data-service="painter" aria-label="Painter services">
+            <span class="service-icon">🎨</span>
+            <span class="service-name">Painter</span>
+          </button>
+          <button class="service-card glass" data-service="car-mechanic" aria-label="Car Mechanic services">
+            <span class="service-icon">🚗</span>
+            <span class="service-name">Car Mechanic</span>
+          </button>
+          <button class="service-card glass" data-service="bike-mechanic" aria-label="Bike Mechanic services">
+            <span class="service-icon">🏍️</span>
+            <span class="service-name">Bike Mechanic</span>
+          </button>
+          <button class="service-card glass" data-service="cleaner" aria-label="Cleaner services">
+            <span class="service-icon">🧹</span>
+            <span class="service-name">Cleaner</span>
+          </button>
+          <button class="service-card glass" data-service="appliance" aria-label="Appliance Repair services">
+            <span class="service-icon">🔧</span>
+            <span class="service-name">Appliance Repair</span>
+          </button>
+        </div>
       </div>
-      <div class="service-card" data-service="plumber">
-        <span class="service-icon">🚰</span>
-        <span class="service-name">Plumber</span>
+    </section>
+    
+    <!-- Featured Workers -->
+    <section class="section" style="background: var(--surface-alt);">
+      <div class="container">
+        <div class="text-center mb-4">
+          <h2 data-i18n="featuredWorkers">Featured Professionals</h2>
+          <p class="text-muted" data-i18n="workersSubtitle">Verified workers ready to help you</p>
+        </div>
+        
+        <div id="workersGrid" class="workers-grid">
+          <div class="text-center">
+            <span class="loading"></span>
+            <p class="text-muted mt-2">Loading professionals...</p>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <a href="dashboard.html" class="btn btn-outline">View All Workers →</a>
+        </div>
       </div>
-      <div class="service-card" data-service="ac">
-        <span class="service-icon">❄️</span>
-        <span class="service-name">AC Technician</span>
+    </section>
+    
+    <!-- Support CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="card glass text-center" style="max-width: 800px; margin: 0 auto; border: 2px solid var(--primary);">
+          <h3 data-i18n="needHelp">Need Custom Help?</h3>
+          <p class="text-muted mb-3" data-i18n="needHelpText">Can't find what you need? Submit a support request and we'll connect you with the right professional within 24 hours.</p>
+          <a href="contact.html#support" class="btn btn-primary" data-i18n="getSupport">Get Support</a>
+        </div>
       </div>
-      <div class="service-card" data-service="carpenter">
-        <span class="service-icon">🪵</span>
-        <span class="service-name">Carpenter</span>
-      </div>
-      <div class="service-card" data-service="mason">
-        <span class="service-icon">🧱</span>
-        <span class="service-name">Mason</span>
-      </div>
-      <div class="service-card" data-service="painter">
-        <span class="service-icon">🎨</span>
-        <span class="service-name">Painter</span>
-      </div>
-      <div class="service-card" data-service="car-mechanic">
-        <span class="service-icon">🚗</span>
-        <span class="service-name">Car Mechanic</span>
-      </div>
-      <div class="service-card" data-service="bike-mechanic">
-        <span class="service-icon">🏍️</span>
-        <span class="service-name">Bike Mechanic</span>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Support CTA -->
-  <section class="section" style="background: var(--surface); margin: 4rem auto; max-width: 800px; border-radius: var(--radius-lg); padding: 3rem; text-align: center; border: 2px solid var(--primary);">
-    <h3 data-i18n="needHelp">Need Custom Help?</h3>
-    <p data-i18n="needHelpText" style="margin: 1rem 0 2rem; color: var(--text-sec);">Can't find what you need? Submit a support request and we'll connect you with the right professional within 24 hours.</p>
-    <a href="contact.html#support" class="btn btn-primary" data-i18n="getSupport">Get Support</a>
-  </section>
+    </section>
+  </main>
   
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="logo">GharFix.pk</a>
+        <a href="index.html" class="logo">
+          <img src="assets/images/logo.png" alt="KarigarHub" class="logo-img" onerror="this.style.display='none'">
+          KarigarHub.pk
+        </a>
         <p>Pakistan's trusted home services platform. Verified professionals, guaranteed quality work.</p>
         <div class="social-links">
-          <a href="https://www.facebook.com/share/1HtgWdb4eR/" target="_blank" class="social-link" title="Facebook">f</a>
-          <a href="https://www.instagram.com/explorevista2025" target="_blank" class="social-link" title="Instagram">📷</a>
-          <a href="https://www.linkedin.com/in/muhammad-ali-kn-22505a28a" target="_blank" class="social-link" title="LinkedIn">in</a>
-          <a href="https://t.me/Aiearnverse" target="_blank" class="social-link" title="Telegram">✈️</a>
+          <a href="https://www.facebook.com/share/1HtgWdb4eR/" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">f</a>
+          <a href="https://www.instagram.com/explorevista2025" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">📷</a>
+          <a href="https://www.linkedin.com/in/muhammad-ali-kn-22505a28a" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">in</a>
+          <a href="https://t.me/Aiearnverse" target="_blank" rel="noopener" class="social-link" aria-label="Telegram">✈️</a>
         </div>
       </div>
       
       <div class="footer-links">
-        <h4>Quick Links</h4>
+        <h4 data-i18n="quickLinks">Quick Links</h4>
         <a href="index.html" data-i18n="home">Home</a>
         <a href="about.html" data-i18n="about">About Us</a>
         <a href="#services" data-i18n="services">Services</a>
         <a href="contact.html" data-i18n="contact">Contact</a>
-        <a href="dashboard.html">Dashboard</a>
+        <a href="dashboard.html" data-i18n="dashboard">Dashboard</a>
       </div>
       
       <div class="footer-links">
-        <h4>Legal</h4>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="disclaimer.html">Disclaimer</a>
+        <h4 data-i18n="legal">Legal</h4>
+        <a href="privacy.html" data-i18n="privacy">Privacy Policy</a>
+        <a href="terms.html" data-i18n="terms">Terms of Service</a>
+        <a href="disclaimer.html" data-i18n="disclaimer">Disclaimer</a>
       </div>
       
       <div class="footer-links">
-        <h4>Contact</h4>
-        <p>📞 <a href="tel:+923441695860">+92 344 1695860</a></p>
-        <p>✉️ <a href="mailto:muhammadalikn53@gmail.com">muhammadalikn53@gmail.com</a></p>
+        <h4 data-i18n="contact">Contact</h4>
+        <p>📞 <a href="tel:+923441695860" data-phone>+92 344 1695860</a></p>
+        <p>✉️ <a href="mailto:muhammadalikn53@gmail.com" data-email>muhammadalikn53@gmail.com</a></p>
         <p>🕐 Mon-Sat: 9AM - 9PM PKT</p>
       </div>
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; 2026 GharFix Pakistan. All rights reserved.</p>
-      <p style="margin-top: 0.5rem; font-size: 0.9rem;">Founded by <strong>Muhammad Ali</strong> — Provide fast and reliable home services in Pakistan</p>
+      <p>&copy; <span id="currentYear"></span> KarigarHub Pakistan. All rights reserved.</p>
+      <p class="text-muted" style="font-size: 0.9rem; margin-top: 0.5rem;">
+        <span data-i18n="founded">Founded by</span> <strong id="founderName">Muhammad Ali</strong> — <span id="founderBio">Provide fast and reliable home services in Pakistan</span>
+      </p>
     </div>
   </footer>
   
