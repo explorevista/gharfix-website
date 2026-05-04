@@ -1,59 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login – GharFix Pakistan</title>
+  <title>Login – KarigarHub Pakistan</title>
+  <meta name="description" content="Login to your KarigarHub account to book services and manage your profile.">
+  
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="toast"></div>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="toast" role="status" aria-live="polite"></div>
   
   <nav class="navbar">
     <div class="nav-container">
-      <a href="index.html" class="logo">GharFix.pk</a>
-      <button class="theme-toggle" id="themeToggle">🌓</button>
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="KarigarHub" class="logo-img" onerror="this.style.display='none'">
+        KarigarHub.pk
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
     </div>
   </nav>
   
-  <main style="min-height: calc(100vh - 200px); display: flex; align-items: center; justify-content: center; padding: 4rem 2rem;">
-    <div class="card" style="max-width: 450px; width: 100%; padding: 3rem; border: 2px solid var(--primary);">
-      <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">Welcome Back</h2>
-      
-      <form id="loginForm">
-        <div class="form-group">
-          <label for="loginEmail">Email Address</label>
-          <input type="email" id="loginEmail" class="form-control" placeholder="you@example.com" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="loginPassword">Password</label>
-          <div class="password-wrapper">
-            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
-            <button type="button" class="password-toggle">👁️</button>
+  <main id="main">
+    <section class="section" style="min-height: calc(100vh - 200px); display: flex; align-items: center; justify-content: center;">
+      <div class="container">
+        <div class="card glass" style="max-width: 480px; margin: 0 auto; padding: 3rem; border: 2px solid var(--primary);">
+          <h2 class="text-center" data-i18n="welcomeBack">Welcome Back</h2>
+          <p class="text-center text-muted mb-4" data-i18n="loginSubtitle">Login to access your KarigarHub account</p>
+          
+          <form id="loginForm" class="form">
+            <div class="form-group">
+              <label for="loginEmail" data-i18n="email">Email Address</label>
+              <input type="email" id="loginEmail" class="form-control" placeholder="you@example.com" required autocomplete="email">
+            </div>
+            
+            <div class="form-group">
+              <label for="loginPassword" data-i18n="password">Password</label>
+              <div class="password-wrapper">
+                <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required minlength="6" autocomplete="current-password">
+                <button type="button" class="password-toggle" aria-label="Toggle password visibility">👁️</button>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">
+              <span class="btn-text" data-i18n="login">Login</span>
+              <span class="loading hidden"></span>
+            </button>
+          </form>
+          
+          <p class="text-center mt-3">
+            <a href="forgot-password.html" class="text-primary" data-i18n="forgotPass">Forgot password?</a>
+          </p>
+          
+          <div class="auth-footer text-center mt-4">
+            <p class="text-muted" data-i18n="noAccount">Don't have an account?</p>
+            <a href="signup.html" class="btn btn-outline btn-sm" data-i18n="signUp">Sign up</a>
           </div>
         </div>
-        
-        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
-          <span class="btn-text">Login</span>
-          <span class="loading hidden"></span>
-        </button>
-      </form>
-      
-      <p style="text-align: center; margin-top: 1.5rem;">
-        <a href="forgot-password.html" style="color: var(--accent);">Forgot password?</a>
-      </p>
-      
-      <p style="text-align: center; margin-top: 1rem; color: var(--text-sec);">
-        Don't have an account? <a href="signup.html" style="color: var(--primary); font-weight: 600;">Sign up</a>
-      </p>
-    </div>
+      </div>
+    </section>
   </main>
   
   <script type="module">
     import { auth, signInWithEmailAndPassword } from './firebase.js';
+    import { showToast } from './app.js';
     
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -64,23 +77,38 @@
       const btnText = btn.querySelector('.btn-text');
       const loading = btn.querySelector('.loading');
       
+      // Validate
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast('Please enter a valid email', 'error');
+        return;
+      }
+      
+      // Show loading
       btn.disabled = true;
       btnText.classList.add('hidden');
       loading.classList.remove('hidden');
       
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        window.showToast('Login successful! Redirecting...', 'success');
-        setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
+        showToast('Login successful! Redirecting...', 'success');
+        
+        // Redirect after short delay
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1500);
+        
       } catch (error) {
         console.error('Login error:', error);
+        
         const messages = {
           'auth/invalid-email': 'Invalid email address',
+          'auth/user-disabled': 'This account has been disabled',
           'auth/user-not-found': 'No account found with this email',
           'auth/wrong-password': 'Incorrect password',
           'auth/invalid-credential': 'Invalid email or password'
         };
-        window.showToast(messages[error.code] || 'Login failed. Please try again.', 'error');
+        
+        showToast(messages[error.code] || 'Login failed. Please try again.', 'error');
       } finally {
         btn.disabled = false;
         btnText.classList.remove('hidden');
