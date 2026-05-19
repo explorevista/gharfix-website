@@ -1,154 +1,22 @@
-<!DOCTYPE html>
-<html lang="en-GB" dir="ltr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- ================= SEO CORE ================= -->
-  <title>KarigarHub Pakistan | Trusted Home Services Platform</title>
-  <meta name="description" content="KarigarHub Pakistan connects you with verified electricians, plumbers, AC technicians, carpenters & mechanics. Fast, reliable home services at your doorstep.">
-  <meta name="keywords" content="home services pakistan, electrician pakistan, plumber pakistan, ac repair, karigarhub, skilled workers pakistan">
-  <meta name="author" content="Muhammad Ali">
-
-  <!-- ================= GOOGLE SEARCH CONSOLE ================= -->
-  <meta name="google-site-verification" content="DcbWTnUxvJVAUExh8X-csHxO0JJmB4AMAIuveWWCdDo" />
-
-  <!-- ================= OPEN GRAPH (FACEBOOK/WHATSAPP SEO) ================= -->
-  <meta property="og:title" content="KarigarHub Pakistan - Trusted Home Services">
-  <meta property="og:description" content="Verified electricians, plumbers & technicians across Pakistan. Book trusted professionals instantly.">
-  <meta property="og:image" content="assets/images/og-image.jpg">
-  <meta property="og:url" content="https://karigarhubpk.github.io">
-  <meta property="og:type" content="website">
-
-  <!-- ================= TWITTER CARDS ================= -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="KarigarHub Pakistan">
-  <meta name="twitter:description" content="Book trusted home service professionals in Pakistan instantly.">
-  <meta name="twitter:image" content="assets/images/og-image.jpg">
-
-  <!-- ================= FAVICON ================= -->
-  <link rel="icon" href="assets/images/favicon.png">
-
-  <!-- ================= GOOGLE FONTS ================= -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- ================= GOOGLE ANALYTICS ================= -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9NE5E50GG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-Z9NE5E50GG');
-  </script>
-
-  <!-- ================= ADSENSE READY ================= -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7495097418204600"
-     crossorigin="anonymous"></script>
-
-  <!-- ================= SCHEMA MARKUP (SEO BOOST) ================= -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "KarigarHub Pakistan",
-    "url": "https://karigarhubpk.github.io",
-    "image": "assets/images/logo.png",
-    "description": "Home services platform connecting customers with verified professionals in Pakistan.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "PK"
-    }
-  }
-  </script>
-
-  <!-- ================= STYLES ================= -->
-  <style>
-    body { margin:0; font-family:Poppins,sans-serif; background:#f5f7fb; }
-
-    header {
-      background:#0f172a;
-      color:white;
-      padding:15px 20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-
-    .logo { font-weight:700; color:#facc15; }
-
-    nav a {
-      color:white;
-      margin:0 10px;
-      text-decoration:none;
-    }
-
-    .btn {
-      padding:8px 14px;
-      border-radius:20px;
-      background:#facc15;
-      color:black;
-      font-weight:600;
-      text-decoration:none;
-    }
-
-    .hero {
-      text-align:center;
-      padding:80px 20px;
-      background:linear-gradient(135deg,#0f172a,#1e293b);
-      color:white;
-    }
-
-    footer {
-      background:#0f172a;
-      color:#aaa;
-      text-align:center;
-      padding:20px;
-      margin-top:40px;
-    }
-
-    .mobile-toggle { display:none; cursor:pointer; }
-
-    @media(max-width:768px){
-      nav { display:none; }
-      .mobile-toggle { display:block; color:white; }
-    }
-  </style>
-</head>
-
-<body>
-
-<!-- ================= HEADER ================= -->
-<header>
-  <div class="logo">KarigarHub.pk</div>
-
-  <div class="mobile-toggle" onclick="toggleMenu()">☰</div>
-
-  <nav id="menu">
-    <a href="#">Home</a>
-    <a href="#services">Services</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="login.html" class="btn">Login</a>
-  </nav>
-</header>
-
-<!-- ================= HERO ================= -->
-<section class="hero">
-  <h1>Find Trusted Home Professionals</h1>
-  <p>Electricians, Plumbers, AC Technicians & More in Pakistan</p>
-  <a href="#services" class="btn">Browse Services</a>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer>
-  © 2026 KarigarHub Pakistan | All Rights Reserved
-</footer>
-
 <!-- ================= JS ================= -->
 <script>
 function toggleMenu(){
   const menu = document.getElementById("menu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
+
+  if(menu.style.display === "block"){
+    menu.style.display = "none";
+  } else {
+    menu.style.display = "block";
+  }
+}
+
+/* ================= SERVICE WORKER ================= */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(reg => console.log("Service Worker Registered"))
+      .catch(err => console.log("Service Worker Error", err));
+  });
 }
 </script>
 
