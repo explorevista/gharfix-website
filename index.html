@@ -1,24 +1,643 @@
-<!-- ================= JS ================= -->
-<script>
-function toggleMenu(){
-  const menu = document.getElementById("menu");
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  if(menu.style.display === "block"){
-    menu.style.display = "none";
-  } else {
-    menu.style.display = "block";
+  <!-- ================= SEO CORE ================= -->
+  <title>KarigarHub Pakistan | Trusted Home Services Platform</title>
+
+  <meta name="description" content="KarigarHub Pakistan connects you with verified electricians, plumbers, AC technicians, carpenters & mechanics. Fast, reliable home services at your doorstep.">
+
+  <meta name="keywords" content="home services pakistan, electrician pakistan, plumber pakistan, ac repair, carpenter, mechanics, karigarhub pakistan">
+
+  <meta name="author" content="Muhammad Ali">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://karigarhubpk.github.io/">
+
+  <!-- ================= GOOGLE SEARCH CONSOLE ================= -->
+  <meta name="google-site-verification" content="DcbWTnUxvJVAUExh8X-csHxO0JJmB4AMAIuveWWCdDo" />
+
+  <!-- ================= OPEN GRAPH SEO ================= -->
+  <meta property="og:title" content="KarigarHub Pakistan | Trusted Home Services">
+  <meta property="og:description" content="Find trusted electricians, plumbers, AC technicians & mechanics across Pakistan.">
+  <meta property="og:image" content="https://karigarhubpk.github.io/assets/images/logo.png">
+  <meta property="og:url" content="https://karigarhubpk.github.io/">
+  <meta property="og:type" content="website">
+
+  <!-- ================= TWITTER SEO ================= -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KarigarHub Pakistan">
+  <meta name="twitter:description" content="Pakistan Trusted Home Services Platform">
+  <meta name="twitter:image" content="https://karigarhubpk.github.io/assets/images/logo.png">
+
+  <!-- ================= FAVICON ================= -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- ================= GOOGLE FONTS ================= -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ================= GOOGLE ANALYTICS ================= -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9NE5E50GG"></script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag(){
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-Z9NE5E50GG');
+  </script>
+
+  <!-- ================= GOOGLE ADSENSE ================= -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7495097418204600"
+    crossorigin="anonymous">
+  </script>
+
+  <!-- ================= STRUCTURED DATA SEO ================= -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LocalBusiness",
+    "name":"KarigarHub Pakistan",
+    "url":"https://karigarhubpk.github.io/",
+    "logo":"https://karigarhubpk.github.io/assets/images/logo.png",
+    "image":"https://karigarhubpk.github.io/assets/images/logo.png",
+    "description":"Trusted home services platform in Pakistan.",
+    "telephone":"+923441695860",
+    "address":{
+      "@type":"PostalAddress",
+      "addressCountry":"PK"
+    }
   }
-}
+  </script>
 
-/* ================= SERVICE WORKER ================= */
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/service-worker.js")
-      .then(reg => console.log("Service Worker Registered"))
-      .catch(err => console.log("Service Worker Error", err));
-  });
-}
-</script>
+  <!-- ================= CSS ================= -->
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#f8fafc;
+      color:#0f172a;
+      line-height:1.6;
+    }
+
+    :root{
+      --primary:#D4AF37;
+      --secondary:#0f172a;
+      --light:#ffffff;
+      --gray:#64748b;
+    }
+
+    a{
+      text-decoration:none;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    .container{
+      width:100%;
+      max-width:1200px;
+      margin:auto;
+      padding:0 20px;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    .navbar{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:rgba(15,23,42,0.97);
+      backdrop-filter:blur(12px);
+      border-bottom:2px solid var(--primary);
+    }
+
+    .nav-container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 20px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:1.4rem;
+      font-weight:800;
+      color:var(--primary);
+    }
+
+    .logo img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+
+    .nav-links a{
+      color:white;
+      font-weight:500;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:var(--primary);
+    }
+
+    .btn{
+      display:inline-block;
+      background:linear-gradient(135deg,#D4AF37,#facc15);
+      color:#000;
+      padding:12px 24px;
+      border-radius:999px;
+      font-weight:700;
+      transition:0.3s;
+    }
+
+    .btn:hover{
+      transform:translateY(-3px);
+    }
+
+    /* ================= MOBILE MENU ================= */
+
+    .mobile-toggle{
+      display:none;
+      font-size:2rem;
+      color:white;
+      cursor:pointer;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero{
+      position:relative;
+      min-height:90vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+      background:#0f172a;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:url('assets/images/hero.jpg') center/cover no-repeat;
+      opacity:0.35;
+    }
+
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg,rgba(15,23,42,0.9),rgba(212,175,55,0.15));
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:800px;
+      padding:20px;
+    }
+
+    .hero h1{
+      font-size:3.5rem;
+      line-height:1.2;
+      margin-bottom:20px;
+      background:linear-gradient(135deg,#D4AF37,#06b6d4);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      color:#e2e8f0;
+      font-size:1.2rem;
+      margin-bottom:35px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    .btn-outline{
+      background:transparent;
+      border:2px solid var(--primary);
+      color:var(--primary);
+    }
+
+    .btn-outline:hover{
+      background:var(--primary);
+      color:#000;
+    }
+
+    /* ================= SERVICES ================= */
+
+    .section{
+      padding:80px 0;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .section-title h2{
+      font-size:2.5rem;
+      margin-bottom:10px;
+      color:#0f172a;
+    }
+
+    .section-title p{
+      color:var(--gray);
+    }
+
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:25px;
+    }
+
+    .service-card{
+      background:white;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      transition:0.3s;
+      border:1px solid #e2e8f0;
+    }
+
+    .service-card:hover{
+      transform:translateY(-8px);
+      border-color:#D4AF37;
+    }
+
+    .service-card img{
+      height:220px;
+      width:100%;
+      object-fit:cover;
+    }
+
+    .service-content{
+      padding:25px;
+    }
+
+    .service-content h3{
+      margin-bottom:10px;
+      font-size:1.2rem;
+    }
+
+    .service-content p{
+      color:var(--gray);
+      margin-bottom:20px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer{
+      background:#0f172a;
+      color:#94a3b8;
+      padding:60px 0 20px;
+      margin-top:50px;
+      border-top:3px solid var(--primary);
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:30px;
+      margin-bottom:40px;
+    }
+
+    .footer-links h4{
+      color:#D4AF37;
+      margin-bottom:15px;
+    }
+
+    .footer-links a{
+      display:block;
+      color:#94a3b8;
+      margin-bottom:10px;
+    }
+
+    .footer-links a:hover{
+      color:#D4AF37;
+    }
+
+    .footer-bottom{
+      border-top:1px solid #334155;
+      padding-top:20px;
+      text-align:center;
+      font-size:0.9rem;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media(max-width:768px){
+
+      .mobile-toggle{
+        display:block;
+      }
+
+      .nav-links{
+        position:absolute;
+        top:100%;
+        left:0;
+        right:0;
+        background:#0f172a;
+        flex-direction:column;
+        padding:20px;
+        display:none;
+      }
+
+      .nav-links.active{
+        display:flex;
+      }
+
+      .hero h1{
+        font-size:2.2rem;
+      }
+
+      .hero p{
+        font-size:1rem;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+
+  <header class="navbar">
+
+    <div class="container nav-container">
+
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="KarigarHub">
+        KarigarHub.pk
+      </a>
+
+      <div class="mobile-toggle" onclick="toggleMenu()">
+        ☰
+      </div>
+
+      <nav class="nav-links" id="menu">
+
+        <a href="index.html">Home</a>
+
+        <a href="#services">Services</a>
+
+        <a href="about.html">About</a>
+
+        <a href="contact.html">Contact</a>
+
+        <a href="login.html" class="btn">Login</a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+      <h1>
+        Find Trusted Home Professionals Instantly
+      </h1>
+
+      <p>
+        Electricians, Plumbers, AC Technicians, Carpenters & Mechanics Across Pakistan.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#services" class="btn">
+          Browse Services
+        </a>
+
+        <a href="https://wa.me/923441695860" class="btn btn-outline">
+          WhatsApp Support
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+
+  <section class="section" id="services">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>Our Services</h2>
+
+        <p>Professional home services across Pakistan</p>
+
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+
+          <img src="assets/images/electrician.jpg" alt="Electrician">
+
+          <div class="service-content">
+
+            <h3>Electrician</h3>
+
+            <p>Professional electrical repair and installation services.</p>
+
+            <a href="#" class="btn">
+              Book Now
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="service-card">
+
+          <img src="assets/images/plumber.jpg" alt="Plumber">
+
+          <div class="service-content">
+
+            <h3>Plumber</h3>
+
+            <p>Trusted plumbing and water system solutions.</p>
+
+            <a href="#" class="btn">
+              Book Now
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="service-card">
+
+          <img src="assets/images/ac-tech.jpg" alt="AC Repair">
+
+          <div class="service-content">
+
+            <h3>AC Technician</h3>
+
+            <p>AC installation, repair and maintenance services.</p>
+
+            <a href="#" class="btn">
+              Book Now
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-links">
+
+          <h4>KarigarHub</h4>
+
+          <p>
+            Pakistan trusted home services platform.
+          </p>
+
+        </div>
+
+        <div class="footer-links">
+
+          <h4>Quick Links</h4>
+
+          <a href="index.html">Home</a>
+
+          <a href="about.html">About</a>
+
+          <a href="contact.html">Contact</a>
+
+        </div>
+
+        <div class="footer-links">
+
+          <h4>Legal</h4>
+
+          <a href="privacy.html">Privacy Policy</a>
+
+          <a href="terms.html">Terms & Conditions</a>
+
+        </div>
+
+        <div class="footer-links">
+
+          <h4>Contact</h4>
+
+          <a href="tel:+923441695860">
+            +92 344 1695860
+          </a>
+
+          <a href="mailto:muhammadalikn53@gmail.com">
+            muhammadalikn53@gmail.com
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        © 2026 KarigarHub Pakistan — All Rights Reserved
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    function toggleMenu(){
+
+      const menu = document.getElementById("menu");
+
+      menu.classList.toggle("active");
+
+    }
+
+    /* ================= SERVICE WORKER ================= */
+
+    if ("serviceWorker" in navigator) {
+
+      window.addEventListener("load", () => {
+
+        navigator.serviceWorker.register("/service-worker.js")
+
+        .then(reg => console.log("Service Worker Registered"))
+
+        .catch(err => console.log("Service Worker Error", err));
+
+      });
+
+    }
+
+  </script>
 
 </body>
 </html>
